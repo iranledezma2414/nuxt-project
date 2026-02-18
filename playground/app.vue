@@ -1,45 +1,64 @@
+<template>
+  <div :class="['apple-container', { 'light-mode': isLight }]">
+    <button @click="toggleTheme" class="theme-switch">
+      <i :class="isLight ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"></i>
+    </button>
 
- <template>
-  <div class="main-container"> 
-    <div class="theme-switch" id="theme-toggle">
-      <i class="fa-solid fa-moon"></i>
-    </div>
+    <main class="canvas">
+      <div class="glass-card">
+        <header class="card-header">
+          <div class="profile-frame">
+            <img src="/profile/profile.png" alt="Irán Ledezma" class="profile-img" />
+          </div>
+          <div class="identity">
+            <h1>Irán Ledezma</h1>
+            <p class="role-text">Ingeniero en TIC</p>
+          </div>
+        </header>
 
-    <div class="background-shapes">
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-    </div>
+        <div class="divider"></div>
 
-    <div class="card">
-      <div class="card-header">
-        <div class="profile-img">
-          <i class="fa-solid fa-user-astronaut"></i>
-        </div>
-        <h1>Irán Ledezma</h1>
-        <h2>Ingeniero en TIC & Desarrollador</h2>
+        <section class="highlight-box">
+          <div class="icon-badge">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div class="text-content">
+            <span class="label">Certificación</span>
+            <h2>Diplomado en Ciencia de Datos</h2>
+            <p>Especialista en modelos predictivos y análisis de big data.</p>
+          </div>
+        </section>
+
+        <section class="skills-list">
+          <div class="skill">
+            <i class="fa-brands fa-python"></i> <span>Python Data</span>
+          </div>
+          <div class="skill">
+            <i class="fa-brands fa-vuejs"></i> <span>Nuxt 3</span>
+          </div>
+          <div class="skill">
+            <i class="fa-solid fa-database"></i> <span>SQL</span>
+          </div>
+        </section>
+
+        <button class="action-btn">Contactar</button>
       </div>
-
-      <div class="card-body">
-        <div class="highlight-badge">
-          <i class="fa-solid fa-certificate"></i>
-          <span>Diplomado en Ciencia de Datos!!</span>
-        </div>
-        <p class="bio">
-          Especialista en desarrollo web y análisis de datos.
-        </p>
-        </div>
-
-      <div class="card-footer">
-        <button class="btn-contact">Contactar</button>
-      </div>
-    </div>
+    </main>
   </div>
 </template>
 
-
-
-
-
 <script setup>
+import { ref, onMounted } from 'vue'
+
+const isLight = ref(false)
+
+const toggleTheme = () => {
+  isLight.value = !isLight.value
+  localStorage.setItem('theme', isLight.value ? 'light' : 'dark')
+}
+
+onMounted(() => {
+  // Recuperar tema
+  if (localStorage.getItem('theme') === 'light') isLight.value = true
+})
 </script>
